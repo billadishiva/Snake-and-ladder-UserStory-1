@@ -19,7 +19,7 @@ import com.shiva.game.modules.Snake;
 public class BoardService {
     public Board board;
     public int initialNumberOfPlayers;
-    public Queue<Player> players;  private boolean isGameCompleted;
+    public Queue<Player> players;  public boolean isGameCompleted;
 
     public static final int DEFAULT_BOARD_SIZE = 100;
 
@@ -61,7 +61,7 @@ public class BoardService {
      * ==========logic for the game==========
      */
 
-    private int getNewPositionAfterGoingThroughSnakesAndLadders(int newPosition) {
+    public int getNewPositionAfterGoingThroughSnakesAndLadders(int newPosition) {
         int previousPosition;
 
         do {
@@ -81,7 +81,7 @@ public class BoardService {
         return newPosition;
     }
 
-    private void movePlayer(Player player, int positions) {
+    public void movePlayer(Player player, int positions) {
         int oldPosition = board.getPlayerPieces().get(player.getId());
         int newPosition = oldPosition + positions;
 
@@ -97,17 +97,17 @@ public class BoardService {
         System.out.println(" Player " + player.getPlayerName() + " rolled a " + positions + " and moved from " + oldPosition +" to " + newPosition);
     }
 
-    private int getTotalValueAfterDiceRolls() {
+    public int getTotalValueAfterDiceRolls() {
         return DiceService.roll();
     }
 
-    private boolean hasPlayerWon(Player player) {
+    public boolean hasPlayerWon(Player player) {
         int playerPosition = board.getPlayerPieces().get(player.getId());
         int winningPosition = board.getSize();
         return playerPosition == winningPosition; 
     }
 
-    private boolean isGameCompleted() {
+    public boolean isGameCompleted() {
         int currentNumberOfPlayers = players.size();
         return currentNumberOfPlayers < initialNumberOfPlayers;
     }
